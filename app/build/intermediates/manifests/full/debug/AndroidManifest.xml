@@ -23,6 +23,7 @@
         </activity>
         <activity android:name="m117.cs.foodspinner.ListActivity" />
         <activity android:name="m117.cs.foodspinner.ResultActivity" />
+        <activity android:name="m117.cs.foodspinner.SlotActivity" />
     </application>
 
 </manifest>

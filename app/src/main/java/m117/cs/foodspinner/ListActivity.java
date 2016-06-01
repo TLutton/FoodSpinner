@@ -33,6 +33,7 @@ public class ListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String zipCode = intent.getStringExtra(MainActivity.ZIP_CODE);
+        // TODO: GPS variable
 
         // TODO: Do something with zipCode or location or whatever
 
@@ -152,8 +153,16 @@ public class ListActivity extends AppCompatActivity {
         result.add(itemName.get(resultIndex));
         result.add(itemDesc.get(resultIndex));
 
+        /**
         // Open the result page
         Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra(SPIN_RESULT, result);
+        startActivity(intent);
+         **/
+
+        /** TOMMY */
+        // Open the slot
+        Intent intent = new Intent(this, SlotActivity.class);
         intent.putExtra(SPIN_RESULT, result);
         startActivity(intent);
     }

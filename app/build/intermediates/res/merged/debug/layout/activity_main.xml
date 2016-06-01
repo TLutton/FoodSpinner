@@ -34,11 +34,19 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enter_zip_button"
+        android:text="@string/button_enter_zip"
         android:id="@+id/button_enter_zip_code"
         android:layout_marginTop="40dp"
         android:singleLine="false"
         android:layout_below="@+id/edit_enter_zip_code"
         android:layout_centerHorizontal="true"
         android:onClick="enterZipCode" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_get_user_location"
+        android:text="@string/button_get_user_location"
+        android:layout_below="@+id/button_enter_zip_code"
+        android:layout_centerHorizontal="true"
+        android:onClick="getUserLocation"/>
 </RelativeLayout>

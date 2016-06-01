@@ -3,4 +3,6 @@
     <string name="enter_zip_title">Enter Your ZIP Code:</string>
     <string name="button_enter_zip">Enter ZIP</string>
     <string name="button_get_user_location">Get Location</string>
+    <string name="button_slot_continue">Continue</string>
+    <string name="button_slot_restart">Restart</string>
 </resources>

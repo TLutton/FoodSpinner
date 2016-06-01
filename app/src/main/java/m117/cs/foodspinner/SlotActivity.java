@@ -2,21 +2,23 @@ package m117.cs.foodspinner;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.content.Intent;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-/**
- * Created by Tommy on 5/31/2016.
- */
+
+import java.util.ArrayList;
+
 public class SlotActivity extends AppCompatActivity implements OnGestureListener {
 
     private ViewFlipper mViewFlipper;
@@ -25,15 +27,22 @@ public class SlotActivity extends AppCompatActivity implements OnGestureListener
     private int mCount;
     private int mFactor;
     private boolean mAnimating;
+    private boolean mHasFlung;
+    private ArrayList result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_slot);
+
         mViewFlipper = (ViewFlipper)findViewById(R.id.view_flipper);
         mDetector = new GestureDetector(this);
         mCount = 0;
         mSpeed = 0;
+        mHasFlung = false;
+
+        Intent intent = getIntent();
+        result = intent.getParcelableArrayListExtra(ListActivity.SPIN_RESULT);
     }
 
     /** Required for compilation **/
@@ -74,6 +83,7 @@ public class SlotActivity extends AppCompatActivity implements OnGestureListener
         try {
             if(mAnimating) return true;
             mAnimating = true;
+            mHasFlung = true;
             mCount = (int) Math.abs(velocityY) / 300;
             mFactor = (int) 300 / mCount;
             mSpeed = mFactor;
@@ -87,7 +97,7 @@ public class SlotActivity extends AppCompatActivity implements OnGestureListener
                 h.postDelayed(r1, mSpeed);
             }
 
-            ((TextView)findViewById(R.id.velocity)).setText("VELOCITY => " + Float.toString(velocityY));
+            //((TextView)findViewById(R.id.velocity)).setText("VELOCITY => " + Float.toString(velocityY));
         } catch (ArithmeticException e) {
             // swiped too slow
             mAnimating = false;
@@ -100,9 +110,15 @@ public class SlotActivity extends AppCompatActivity implements OnGestureListener
         @Override
         public void run() {
             up();
-            if(mCount < 1)
+            if(mCount < 1) {
                 mAnimating = false;
-            else {
+
+                TextView tv = (TextView)findViewById(R.id.textview_slot_result_display);
+                tv.setText(result.get(1).toString());
+                tv.setVisibility(View.VISIBLE);
+                findViewById(R.id.button_slot_continue).setVisibility(View.VISIBLE);
+                findViewById(R.id.button_slot_restart).setVisibility(View.VISIBLE);
+            } else {
                 Handler h = new Handler();
                 h.postDelayed(r1, mSpeed);
             }
@@ -136,8 +152,8 @@ public class SlotActivity extends AppCompatActivity implements OnGestureListener
         else
             mViewFlipper.showPrevious();
 
-        ((TextView)findViewById(R.id.counter)).setText("COUNTER => "+Integer.toString(mCount));
-        ((TextView)findViewById(R.id.speed)).setText("SPEED => "+Integer.toString(mSpeed));
+        //((TextView)findViewById(R.id.counter)).setText("COUNTER => "+Integer.toString(mCount));
+        //((TextView)findViewById(R.id.speed)).setText("SPEED => "+Integer.toString(mSpeed));
 
     }
 
@@ -147,6 +163,11 @@ public class SlotActivity extends AppCompatActivity implements OnGestureListener
             down();
             if (mCount<1) {
                 mAnimating = false;
+                TextView tv = (TextView)findViewById(R.id.textview_slot_result_display);
+                tv.setText(result.get(1).toString());
+                tv.setVisibility(View.VISIBLE);
+                findViewById(R.id.button_slot_continue).setVisibility(View.VISIBLE);
+                findViewById(R.id.button_slot_restart).setVisibility(View.VISIBLE);
             } else {
                 Handler h = new Handler();
                 h.postDelayed(r2, mSpeed);
@@ -179,9 +200,24 @@ public class SlotActivity extends AppCompatActivity implements OnGestureListener
         } else {
             mViewFlipper.showPrevious();
         }
-        ((TextView)findViewById(R.id.counter)).setText("COUNTER => "+Integer.toString(mCount));
-        ((TextView)findViewById(R.id.speed)).setText("SPEED => "+Integer.toString(mSpeed));
+        //((TextView)findViewById(R.id.counter)).setText("COUNTER => "+Integer.toString(mCount));
+        //((TextView)findViewById(R.id90024.speed)).setText("SPEED => "+Integer.toString(mSpeed));
     }
 
+
+    public void continueButton(View view) {
+        if(!mAnimating && mHasFlung) {
+            Intent intent = new Intent(this, ResultActivity.class);
+            intent.putExtra(ListActivity.SPIN_RESULT, result);
+            startActivity(intent);
+        }
+    }
+
+    public void restartButton(View view) {
+        //Intent intent = new Intent(getBaseContext(), ListActivity.class);
+        Intent intent = new Intent(this, ListActivity.class);
+        intent.putExtra(ListActivity.SPIN_RESULT, result);
+        startActivity(intent);
+    }
 
 }

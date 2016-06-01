@@ -22,8 +22,8 @@ public class ResultActivity extends AppCompatActivity {
         String name = (String) result.get(1);
         String desc = (String) result.get(2);
 
-        ImageView resultIcon = (ImageView) findViewById(R.id.result_icon);
-        resultIcon.setImageResource(icon);
+        //ImageView resultIcon = (ImageView) findViewById(R.id.result_icon);
+        //resultIcon.setImageResource(icon);
 
         TextView resultName = (TextView) findViewById(R.id.result_name);
         resultName.setText(name);
