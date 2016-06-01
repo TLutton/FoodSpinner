@@ -26,14 +26,21 @@ public class ListActivity extends AppCompatActivity {
     ArrayList<String> itemName;
     ArrayList<String> itemDesc;
 
+    private double mLatitude;
+    private double mLongitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
         Intent intent = getIntent();
+
+        mLatitude = Double.parseDouble(intent.getStringExtra(MainActivity.COORD_LAT));
+        mLongitude = Double.parseDouble(intent.getStringExtra(MainActivity.COORD_LONG));
+
+        // TODO: Remove zip code
         String zipCode = intent.getStringExtra(MainActivity.ZIP_CODE);
-        // TODO: GPS variable
 
         // TODO: Do something with zipCode or location or whatever
 

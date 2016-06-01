@@ -9,49 +9,55 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="m117.cs.foodspinner.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/enter_zip_title"
-        android:layout_marginTop="144dp"
-        android:clickable="false"
-        android:textSize="30dp"
-        android:id="@+id/text_enter_zip_code"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/edit_enter_zip_code"
-        android:gravity="center"
-        android:maxLength="5"
-        android:layout_below="@+id/text_enter_zip_code"
-        android:layout_centerHorizontal="true" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/checkbox_use_current_location"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:checked="true"
+            android:id="@+id/checkbox_use_current_location"
+            android:onClick="useCurrentLocationCheckbox" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_enter_zip"
-        android:id="@+id/button_enter_zip_code"
-        android:layout_marginTop="40dp"
-        android:singleLine="false"
-        android:layout_below="@+id/edit_enter_zip_code"
-        android:layout_centerHorizontal="true"
-        android:onClick="enterZipCode" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button_get_user_location"
-        android:text="@string/button_get_user_location"
-        android:layout_below="@+id/button_enter_zip_code"
-        android:layout_centerHorizontal="true"
-        android:onClick="getUserLocation"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textview_location_data"
-        android:layout_gravity="center_horizontal"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_enter_location_name"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_location_name"
+                android:textSize="20dp"
+                android:id="@+id/textview_enter_location_name"
+                android:layout_gravity="center_horizontal" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:maxLength="5"
+                android:id="@+id/edittext_enter_location_name"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_get_user_location"
+            android:text="@string/button_get_user_location"
+            android:layout_below="@+id/button_enter_zip_code"
+            android:layout_centerHorizontal="true"
+            android:onClick="setCoordinatesAndContinue"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
 </RelativeLayout>

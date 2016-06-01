@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">The Mercurial Concierge</string>
-    <string name="enter_zip_title">Enter Your ZIP Code:</string>
+    <string name="enter_location_name">Enter A Location</string>
     <string name="button_enter_zip">Enter ZIP</string>
-    <string name="button_get_user_location">Get Location</string>
+    <string name="button_get_user_location">Continue</string>
     <string name="button_slot_continue">Continue</string>
-    <string name="button_slot_restart">Restart</string>
+    <string name="button_slot_restart">Back</string>
+    <string name="checkbox_use_current_location">Use Current Location</string>
 </resources>
