@@ -93,14 +93,6 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button_slot_restart"
-            android:text="@string/button_slot_restart"
-            android:layout_gravity="center_horizontal"
-            android:onClick="restartButton"
-            android:visibility="invisible"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/button_slot_continue"
             android:text="@string/button_slot_continue"
             android:layout_centerHorizontal="true"

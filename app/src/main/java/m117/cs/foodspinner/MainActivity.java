@@ -1,5 +1,6 @@
 package m117.cs.foodspinner;
 
+import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
 import android.location.Criteria;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -31,7 +33,6 @@ public class MainActivity extends AppCompatActivity{
 
     private double mLatitude;
     private double mLongitude;
-    private int mZipCode;
 
     private CheckBox mCheckBox;
     private EditText mEditText;
@@ -44,20 +45,19 @@ public class MainActivity extends AppCompatActivity{
         // default lat/long
         mLatitude  = 0.0; // default to Boelter
         mLongitude = 0.0; // default to Boelter
-        mZipCode = 90024; // default to WW
 
         mCheckBox = (CheckBox)findViewById(R.id.checkbox_use_current_location);
         mEditText = (EditText)findViewById(R.id.edittext_enter_location_name);
 
-    }
+        mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
 
-    /** Called when the user clicks the Enter ZIP button */
-    public void enterZipCode(View view) {
-        //EditText editZipCode = (EditText) findViewById(R.id.edit_enter_zip_code);
-        //String zipCode = editZipCode.getText().toString();
-        //Intent intent = new Intent(this, ListActivity.class);
-        //intent.putExtra(ZIP_CODE, zipCode);
-        //startActivity(intent);
     }
 
     /** Onclick handler of use current location checkbox **/
@@ -119,6 +119,11 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
     /** OnClick handler of continue button. **/
     public void setCoordinatesAndContinue(View view) {
 
@@ -128,23 +133,11 @@ public class MainActivity extends AppCompatActivity{
         else // else set zip code to enter value
             getCoordsFromAddress();
 
-        // pass zip code thru anyway. ??
         Intent intent = new Intent(this, ListActivity.class);
-        intent.putExtra(ZIP_CODE, Integer.toString(mZipCode));  // TODO: Remove zip code
         intent.putExtra(COORD_LAT, Double.toString(mLatitude));
         intent.putExtra(COORD_LONG, Double.toString(mLongitude));
         startActivity(intent);
 
-    }
-
-    /** Getters for latitude and longitude **/
-    // TODO: Remove
-    public double getmLatitude() {
-        return mLatitude;
-    }
-
-    public double getmLongitude() {
-        return mLongitude;
     }
 
 }

@@ -81,20 +81,22 @@ public class SlotActivity extends AppCompatActivity implements OnGestureListener
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         try {
-            if(mAnimating) return true;
-            mAnimating = true;
-            mHasFlung = true;
-            mCount = (int) Math.abs(velocityY) / 300;
-            mFactor = (int) 300 / mCount;
-            mSpeed = mFactor;
-            if(velocityY > 0) {
-                // down
-                Handler h = new Handler();
-                h.postDelayed(r2, mSpeed);
-            } else {
-                // up
-                Handler h = new Handler();
-                h.postDelayed(r1, mSpeed);
+            if(!mHasFlung) {
+                if (mAnimating) return true;
+                mAnimating = true;
+                mHasFlung = true;
+                mCount = (int) Math.abs(velocityY) / 300;
+                mFactor = 300 / mCount;
+                mSpeed = mFactor;
+                if (velocityY > 0) {
+                    // down
+                    Handler h = new Handler();
+                    h.postDelayed(r2, mSpeed);
+                } else {
+                    // up
+                    Handler h = new Handler();
+                    h.postDelayed(r1, mSpeed);
+                }
             }
 
             //((TextView)findViewById(R.id.velocity)).setText("VELOCITY => " + Float.toString(velocityY));
@@ -114,10 +116,9 @@ public class SlotActivity extends AppCompatActivity implements OnGestureListener
                 mAnimating = false;
 
                 TextView tv = (TextView)findViewById(R.id.textview_slot_result_display);
-                tv.setText(result.get(1).toString());
+                tv.setText(result.get(2).toString());
                 tv.setVisibility(View.VISIBLE);
                 findViewById(R.id.button_slot_continue).setVisibility(View.VISIBLE);
-                findViewById(R.id.button_slot_restart).setVisibility(View.VISIBLE);
             } else {
                 Handler h = new Handler();
                 h.postDelayed(r1, mSpeed);
@@ -164,10 +165,9 @@ public class SlotActivity extends AppCompatActivity implements OnGestureListener
             if (mCount<1) {
                 mAnimating = false;
                 TextView tv = (TextView)findViewById(R.id.textview_slot_result_display);
-                tv.setText(result.get(1).toString());
+                tv.setText(result.get(2).toString());
                 tv.setVisibility(View.VISIBLE);
                 findViewById(R.id.button_slot_continue).setVisibility(View.VISIBLE);
-                findViewById(R.id.button_slot_restart).setVisibility(View.VISIBLE);
             } else {
                 Handler h = new Handler();
                 h.postDelayed(r2, mSpeed);
@@ -211,13 +211,6 @@ public class SlotActivity extends AppCompatActivity implements OnGestureListener
             intent.putExtra(ListActivity.SPIN_RESULT, result);
             startActivity(intent);
         }
-    }
-
-    public void restartButton(View view) {
-        //Intent intent = new Intent(getBaseContext(), ListActivity.class);
-        Intent intent = new Intent(this, ListActivity.class);
-        intent.putExtra(ListActivity.SPIN_RESULT, result);
-        startActivity(intent);
     }
 
 }

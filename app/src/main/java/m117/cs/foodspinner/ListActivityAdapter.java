@@ -1,6 +1,7 @@
 package m117.cs.foodspinner;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,11 @@ import java.util.ArrayList;
 
 public class ListActivityAdapter extends ArrayAdapter<String> {
     private final Activity context;
-    private final ArrayList<Integer> itemIcon;
+    private final ArrayList<Bitmap> itemIcon;
     private final ArrayList<String> itemName;
     private final ArrayList<String> itemDesc;
 
-    public ListActivityAdapter(Activity context, ArrayList<Integer> itemIcon, ArrayList<String> itemName, ArrayList<String> itemDesc) {
+    public ListActivityAdapter(Activity context, ArrayList<Bitmap> itemIcon, ArrayList<String> itemName, ArrayList<String> itemDesc) {
         super(context, R.layout.activity_list_item_list, itemName);
 
         this.context = context;
@@ -33,9 +34,21 @@ public class ListActivityAdapter extends ArrayAdapter<String> {
         TextView itemNameView = (TextView) row.findViewById(R.id.list_item_name);
         TextView itemDescView = (TextView) row.findViewById(R.id.list_item_desc);
 
-        itemIconView.setImageResource((int) itemIcon.get(index));
-        itemNameView.setText((String) itemName.get(index));
-        itemDescView.setText((String) itemDesc.get(index));
+        if (index < itemIcon.size()) {
+            if (itemIcon.size() <= 0) {
+                itemIconView.setImageResource(R.mipmap.test_icon);
+            }
+            else {
+                itemIconView.setImageBitmap(itemIcon.get(index));
+            }
+            itemNameView.setText(itemName.get(index));
+            itemDescView.setText(itemDesc.get(index));
+        }
+        else {
+            itemIconView.setImageResource(R.mipmap.test_icon);
+            itemNameView.setText("Loading...");
+            itemDescView.setText("");
+        }
         return row;
     }
 }
