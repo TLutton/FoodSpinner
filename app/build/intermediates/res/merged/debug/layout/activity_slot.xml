@@ -10,7 +10,7 @@
         android:textSize="28sp"
         android:paddingTop="10dip"
         android:textColor="#00ff00"
-        android:text="Slot Machine Example"
+        android:text="Slot Animation"
         android:paddingBottom="50dip" />
     <ViewFlipper
         android:layout_margin="6dip"

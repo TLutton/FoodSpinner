@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter your ZIP code:"
+        android:text="@string/enter_zip_title"
         android:layout_marginTop="144dp"
         android:clickable="false"
         android:textSize="30dp"
@@ -34,11 +34,19 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter ZIP"
+        android:text="@string/button_enter_zip"
         android:id="@+id/button_enter_zip_code"
         android:layout_marginTop="40dp"
         android:singleLine="false"
         android:layout_below="@+id/edit_enter_zip_code"
         android:layout_centerHorizontal="true"
         android:onClick="enterZipCode" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_get_user_location"
+        android:text="@string/button_get_user_location"
+        android:layout_below="@+id/button_enter_zip_code"
+        android:layout_centerHorizontal="true"
+        android:onClick="getUserLocation"/>
 </RelativeLayout>
