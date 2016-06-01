@@ -49,4 +49,9 @@
         android:layout_below="@+id/button_enter_zip_code"
         android:layout_centerHorizontal="true"
         android:onClick="getUserLocation"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_location_data"
+        android:layout_gravity="center_horizontal"/>
 </RelativeLayout>
